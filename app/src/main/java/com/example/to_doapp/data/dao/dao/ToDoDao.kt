@@ -5,7 +5,7 @@ import com.example.to_doapp.data.dao.models.ToDoTaskModel
 import kotlinx.coroutines.flow.Flow
 
 
-//Defibe sql queries
+//Define sql queries
 @Dao
 interface ToDoDao {
 

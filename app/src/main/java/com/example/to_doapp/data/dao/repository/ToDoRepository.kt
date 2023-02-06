@@ -1,11 +1,12 @@
 package com.example.to_doapp.data.dao.repository
 
-import android.icu.text.StringSearch
 import com.example.to_doapp.data.dao.dao.ToDoDao
 import com.example.to_doapp.data.dao.models.ToDoTaskModel
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+@ViewModelScoped
 class ToDoRepository @Inject constructor(private val toDoDao: ToDoDao) {
     val getAllTasks: Flow<List<ToDoTaskModel>> = toDoDao.getAllTask()
 
