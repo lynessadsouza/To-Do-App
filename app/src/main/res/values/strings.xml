@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">To-Do App</string>
+    <string name="add_task">Add Button</string>
+    <string name="top_bar_title">Tasks</string>
+    <string name="top_bar_sort">Sort Tasks</string>
+
 </resources>

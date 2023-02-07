@@ -5,12 +5,14 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.to_doapp.Utils.Action
-import com.example.to_doapp.Utils.Constants.LIST_ARGUMENT_KEY
-import com.example.to_doapp.Utils.Constants.LIST_SCREEN
 import com.example.to_doapp.Utils.Constants.TASK_ARGUMENT_KEY
 import com.example.to_doapp.Utils.Constants.TASK_SCREEN
+import com.example.to_doapp.ui.theme.ViewModel.ToDoViewModel
 
-fun NavGraphBuilder.taskComposable(navigateToListScreen: (Action) -> Unit) {
+fun NavGraphBuilder.taskComposable(
+    navigateToListScreen: (Action) -> Unit,
+    toDoViewModel: ToDoViewModel
+) {
     composable(
         route = TASK_SCREEN,
         arguments = listOf(navArgument(TASK_ARGUMENT_KEY) {
@@ -18,6 +20,5 @@ fun NavGraphBuilder.taskComposable(navigateToListScreen: (Action) -> Unit) {
         })
     )
     {
-
     }
 }

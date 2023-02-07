@@ -1,7 +1,10 @@
 package com.example.to_doapp.ui.theme.ViewModel
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.to_doapp.Utils.SearchAppBarState
 import com.example.to_doapp.data.dao.models.ToDoTaskModel
 import com.example.to_doapp.data.dao.repository.ToDoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,6 +17,10 @@ import javax.inject.Inject
 class ToDoViewModel @Inject constructor(
     private val repository: ToDoRepository
 ) : ViewModel() {
+
+    val searchAppBarState: MutableState<SearchAppBarState> =
+        mutableStateOf(SearchAppBarState.CLOSED)
+    val searchTextState: MutableState<String> = mutableStateOf("")
 
     private val _allTasks = MutableStateFlow<List<ToDoTaskModel>>(emptyList())
     val allTasks: StateFlow<List<ToDoTaskModel>> = _allTasks
