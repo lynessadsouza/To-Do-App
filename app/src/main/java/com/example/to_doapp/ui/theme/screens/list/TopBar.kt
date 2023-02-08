@@ -20,6 +20,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.example.to_doapp.R
 import com.example.to_doapp.Utils.SearchAppBarState
+import com.example.to_doapp.Utils.TrailingIconState
 import com.example.to_doapp.components.PriorityItems
 import com.example.to_doapp.data.dao.models.Priority
 import com.example.to_doapp.ui.theme.ViewModel.ToDoViewModel
@@ -97,7 +98,7 @@ fun SearchAction(
     ) {
         Icon(
             imageVector = Icons.Filled.Search,
-            contentDescription = "Search Task"
+            contentDescription = stringResource(id = R.string.search_task)
         )
     }
 }
@@ -172,6 +173,7 @@ fun SearchAppBar(
     onCloseClicked: () -> Unit,
     onSearchClicked: (String) -> Unit,
 ) {
+    var trailingIconState by remember { mutableStateOf(TrailingIconState.READY_TO_DELETE) }
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -187,7 +189,7 @@ fun SearchAppBar(
             placeholder = {
                 Text(
                     modifier = Modifier.alpha(ContentAlpha.medium),
-                    text = "Search Text",
+                    text = stringResource(id = R.string.search_text),
                     color = Color.White
                 )
             },
@@ -199,7 +201,7 @@ fun SearchAppBar(
                     onClick = { /*TODO*/ }) {
                     Icon(
                         imageVector = Icons.Filled.Search,
-                        contentDescription = "Search Icon",
+                        contentDescription = stringResource(id = R.string.search_icon),
                         tint = Color.White
                     )
                 }
@@ -207,10 +209,26 @@ fun SearchAppBar(
             trailingIcon = {
                 IconButton(
                     modifier = Modifier.alpha(ContentAlpha.disabled),
-                    onClick = { onCloseClicked }) {
+                    onClick = {
+                        when (trailingIconState) {
+                            TrailingIconState.READY_TO_DELETE -> {
+                                onTextChange("")
+                                trailingIconState = TrailingIconState.READY_TO_CLOSE
+                            }
+                            TrailingIconState.READY_TO_CLOSE -> {
+                                if (text.isNotEmpty()) {
+                                    onTextChange("")
+                                } else
+                                    onCloseClicked()
+                                trailingIconState = TrailingIconState.READY_TO_DELETE
+                            }
+                        }
+
+
+                    }) {
                     Icon(
                         imageVector = Icons.Filled.Close,
-                        contentDescription = "Close Icon",
+                        contentDescription = stringResource(id = R.string.close_icon),
                         tint = Color.White
                     )
                 }

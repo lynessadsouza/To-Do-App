@@ -3,5 +3,9 @@
     <string name="add_task">Add Button</string>
     <string name="top_bar_title">Tasks</string>
     <string name="top_bar_sort">Sort Tasks</string>
+<string name="search_icon">Search Icon</string>
+<string name="close_icon">Close Icon</string>
+<string name="search_task"> Search Task</string>
+<string name="search_text"> "Search Text"</string>
 
 </resources>
