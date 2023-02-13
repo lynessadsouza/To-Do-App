@@ -7,5 +7,6 @@
 <string name="close_icon">Close Icon</string>
 <string name="search_task"> Search Task</string>
 <string name="search_text"> "Search Text"</string>
+<string name="no_tasks_found"> No Tasks Found</string>
 
 </resources>

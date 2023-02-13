@@ -12,15 +12,33 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.example.to_doapp.Utils.RequestState
 import com.example.to_doapp.data.dao.models.ToDoTaskModel
 import com.example.to_doapp.ui.theme.taskItemBackgroundColor
 import com.example.to_doapp.ui.theme.taskItemTextColor
 
 @Composable
 fun ListContent(
+    tasks: RequestState<List<ToDoTaskModel>>,
+    navigateToTaskScreen: (taskId: Int) -> Unit
+) {
+    if (tasks is RequestState.Success){
+        if (tasks.data.isEmpty()) {
+            EmptyContent(stringResource(id = com.example.to_doapp.R.string.no_tasks_found))
+        } else {
+            DisplayTasks(tasks = tasks.data, navigateToTaskScreen = navigateToTaskScreen)
+        }
+    }
+
+
+}
+
+@Composable
+fun DisplayTasks(
     tasks: List<ToDoTaskModel>,
     navigateToTaskScreen: (taskId: Int) -> Unit
 ) {
@@ -36,7 +54,6 @@ fun ListContent(
 
     }
 }
-
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -73,8 +90,7 @@ fun TaskItem(
                         .weight(1f), contentAlignment = Alignment.TopEnd
                 ) {
                     Canvas(modifier = Modifier
-                        .width(16.dp)
-                        .height(16.dp), onDraw = {
+                        .size(16.dp), onDraw = {
                         drawCircle(
                             color = toDoTaskModel.priority.color
                         )
